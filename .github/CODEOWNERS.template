@@ -1,0 +1,68 @@
+# CODEOWNERS — plantilla
+#
+# Esto refleja .claude/ownership.json en el formato de GitHub, para que la propiedad
+# de rutas tambien se exija en los PRs (asignacion automatica de revisor y, si se
+# activa la proteccion de rama, revision obligatoria del dueno).
+#
+# ESTA SIN ACTIVAR A PROPOSITO. Los @handles de abajo son marcadores: GitHub
+# rechaza los duenos que no existen y deja un error permanente en la configuracion
+# del repo. Para activarlo:
+#
+#   1. sustituye cada @rol-* por el usuario o equipo real (@usuario o @org/equipo);
+#   2. renombra este archivo a .github/CODEOWNERS;
+#   3. opcional: en Settings > Branches, activa "Require review from Code Owners".
+#
+# OJO con el orden: en GitHub gana la ULTIMA regla que coincide, al contrario que el
+# resolutor del repo (.claude/scripts/check-ownership.py), donde gana la mas
+# especifica. Por eso los patrones van aqui de general a especifico. Si editas, manten
+# ese orden o la propiedad dejara de coincidir con ownership.json.
+
+# --- documentador ---
+/docs/                          @rol-documentador
+/en/                            @rol-documentador
+/templates/                     @rol-documentador
+/README.md                      @rol-documentador
+/CONTRIBUTING.md                @rol-documentador
+/docfx.json                     @rol-documentador
+/toc.yml                        @rol-documentador
+/.markdownlint.json             @rol-documentador
+/crowdin_nopcommerce.yml        @rol-documentador
+
+# --- desarrollador ---
+/services/                      @rol-desarrollador
+/clients/                       @rol-desarrollador
+/web/                           @rol-desarrollador
+/contracts/                     @rol-desarrollador
+
+# --- tester ---
+/tests/                         @rol-tester
+
+# --- disenador ---
+/design/                        @rol-disenador
+/docs/design/                   @rol-disenador
+
+# --- investigador ---
+/docs/research/                 @rol-investigador
+/docs/adr/                      @rol-investigador
+
+# --- qa ---
+/docs/qa/                       @rol-qa
+
+# --- devops ---
+/infra/                         @rol-devops
+/web.config                     @rol-devops
+
+# --- coordinador ---
+/AGENTS.md                      @rol-coordinador
+/CLAUDE.md                      @rol-coordinador
+/.claude/                       @rol-coordinador
+/.agents-work/                  @rol-coordinador
+/docs/memory/                   @rol-coordinador
+/.github/                       @rol-coordinador
+/.gitignore                     @rol-coordinador
+
+# --- cicd ---
+# Va al final a proposito: infra/ci/ debe ganar sobre /infra/ (devops) y
+# .github/workflows/ sobre /.github/ (coordinador).
+/infra/ci/                      @rol-cicd
+/.github/workflows/             @rol-cicd

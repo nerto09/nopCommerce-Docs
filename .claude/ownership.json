@@ -1,0 +1,65 @@
+{
+  "$comment": "Fuente de verdad de la propiedad de rutas. Resolucion: gana el patron mas especifico (prefijo mas largo). Las entradas que terminan en '/' son prefijos de directorio; el resto son rutas de archivo exactas.",
+  "version": 1,
+  "roles": {
+    "investigador": {
+      "owns": ["docs/research/", "docs/adr/"],
+      "reads": ["**"],
+      "notes": "Los ADR se crean en estado 'proposed'. Promover a 'accepted' es decision del coordinador."
+    },
+    "documentador": {
+      "owns": [
+        "docs/",
+        "en/",
+        "templates/",
+        "README.md",
+        "CONTRIBUTING.md",
+        "docfx.json",
+        "toc.yml",
+        ".markdownlint.json",
+        "crowdin_nopcommerce.yml"
+      ],
+      "reads": ["**"],
+      "notes": "docs/ excluye research/, adr/, qa/, design/ y memory/ porque esos prefijos tienen dueno mas especifico."
+    },
+    "desarrollador": {
+      "owns": ["services/", "clients/", "web/", "contracts/"],
+      "reads": ["docs/", "tests/"]
+    },
+    "tester": {
+      "owns": ["tests/"],
+      "reads": ["services/", "contracts/"]
+    },
+    "disenador": {
+      "owns": ["design/", "docs/design/"],
+      "reads": ["**"]
+    },
+    "qa": {
+      "owns": ["docs/qa/"],
+      "reads": ["**"],
+      "notes": "Revisa PRs de todos los roles; no escribe fuera de docs/qa/."
+    },
+    "devops": {
+      "owns": ["infra/", "web.config"],
+      "reads": ["contracts/", "services/"],
+      "notes": "infra/ excluye infra/ci/, que pertenece a cicd."
+    },
+    "cicd": {
+      "owns": [".github/workflows/", "infra/ci/"],
+      "reads": ["**"]
+    },
+    "coordinador": {
+      "owns": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        ".claude/",
+        ".agents-work/",
+        "docs/memory/",
+        ".github/",
+        ".gitignore"
+      ],
+      "reads": ["**"],
+      "notes": "Humano o Claude principal. .github/ es del coordinador salvo workflows/, que es de cicd."
+    }
+  }
+}
